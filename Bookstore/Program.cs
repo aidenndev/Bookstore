@@ -1,6 +1,9 @@
 using Bookstore.Data;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+// DbContext configuration
+builder.Services.AddDbContext<AppDbContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -15,8 +18,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-// DbContext configuration
-builder.Services.AddDbContext<AppDbContext>();
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

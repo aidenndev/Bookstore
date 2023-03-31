@@ -7,7 +7,7 @@ namespace Bookstore.Models
     {
         [Key]
         public string Id { get; set; }
-        [Required]
+        [Display(Name = "Book Name")]
         public string Name { get; set; }
         public string PhotoURL { get; set; }
         public DateTime ReservedDate { get; set; }

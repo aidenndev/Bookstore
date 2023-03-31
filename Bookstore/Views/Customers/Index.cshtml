@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Customer>
+
+@{
+    ViewData["Title"] = "List of Customers";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(customer => customer.Id)</th>
+                    <th>@Html.DisplayNameFor(customer => customer.Name)</th>
+                    <th>@Html.DisplayNameFor(customer => customer.Email)</th>
+                    <th>Tasks</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var customer in Model)
+                {
+                    <tr>
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelItem => customer.Id)
+                        </td>
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelItem => customer.Name)
+                        </td>
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelItem => customer.Email)
+                        </td>
+                        <td class="align-middle">
+                            <a class="btn btn-outline-primary"><i class="bi bi-pencil-square"></i>Edit</a>
+                            <a class="btn btn-outline-danger"><i class="bi bi-trash"></i>Delete</a>
+                        </td>
+                    </tr>           
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

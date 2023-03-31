@@ -16,7 +16,7 @@ namespace Bookstore.Controllers
         public async Task<IActionResult> Index()
         {
             var customers = await _context.Customers.ToListAsync();
-            return View();
+            return View(customers);
         }
     }
 }

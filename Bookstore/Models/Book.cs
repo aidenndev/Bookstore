@@ -6,9 +6,10 @@ namespace Bookstore.Models
     public class Book
     {
         [Key]
-        public int BookId { get; set; }
+        public string Id { get; set; }
         [Required]
-        public string Name { get; set; }  
+        public string Name { get; set; }
+        public string PhotoURL { get; set; }
         public DateTime ReservedDate { get; set; }
 
         //Relationship with Customer

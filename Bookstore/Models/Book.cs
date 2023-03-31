@@ -13,7 +13,7 @@ namespace Bookstore.Models
         public DateTime ReservedDate { get; set; }
 
         //Relationship with Customer
-        public int CustomerId { get; set; }
+        public int? CustomerId { get; set; }
         [ForeignKey("CustomerId")]
         public Customer? Customer { get; set; }
     }

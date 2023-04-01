@@ -1,4 +1,5 @@
 ﻿using Bookstore.Data;
+using Bookstore.Data.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,16 +7,16 @@ namespace Bookstore.Controllers
 {
     public class BooksController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly IBooksService _service;
 
         //Constructor
-        public BooksController(AppDbContext context)
+        public BooksController(IBooksService service)
         {
-            _context = context;
+            _service = service;
         }
         public async Task<IActionResult> Index()
         {
-            var books = await _context.Books.ToListAsync();
+            var books = await _service.GetAll();
             return View(books);
         }
     }

@@ -1,4 +1,5 @@
 using Bookstore.Data;
+using Bookstore.Data.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AppDbContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
 
 //Services configuration
+builder.Services.AddScoped<IBooksService, BooksService>();
 
 //Add services to the container.
 builder.Services.AddControllersWithViews();

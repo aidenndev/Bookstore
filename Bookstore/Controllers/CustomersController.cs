@@ -68,5 +68,23 @@ namespace Bookstore.Controllers
             return View(customer);
         }
 
+        //Delete a Customer
+        public async Task<IActionResult> Delete(int id)
+        {
+            var customer = await _service.GetByIdAsync(id);
+            if (customer == null) return View("NotFound");
+            return View(customer);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var customer = await _service.GetByIdAsync(id);
+            if (customer == null) return View("NotFound");
+
+            await _service.DeleteAsync(id);
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }

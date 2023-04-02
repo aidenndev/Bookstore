@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Bookstore.Data.Base;
+using System.ComponentModel.DataAnnotations;
 
 namespace Bookstore.Models
 {
-    public class Customer
+    public class Customer:IEntityBase
     {
         [Key]
         public int Id { get; set; }

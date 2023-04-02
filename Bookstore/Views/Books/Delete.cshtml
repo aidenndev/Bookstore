@@ -1,0 +1,56 @@
+﻿@model Book
+
+@{
+    ViewData["Title"] = "Delete book";
+}<div class="row text">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h1>@Model.Name - Delete Confirmation</h1>
+        </p>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <div class="form-group" text-center>
+                    <img id="PhotoPreview" style="max-width: 340px;"/>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PhotoURL" class="control-label"></label>
+                    <input asp-for="PhotoURL" class="form-control" readonly/>
+                    <span asp-validation-for="PhotoURL" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Id" class="control-label"></label>
+                    <input asp-for="Id" class="form-control" readonly/>
+                    <span asp-validation-for="Id" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" readonly/>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" readonly/>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="Id"/>
+                        <input type="submit" value="Confirm" class="btn btn-danger float-right"/>
+                    </form>
+                    <a class="btn btn-outline-secondary" asp-action="Index">Show all</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+<script>
+    $(document).ready(function () {
+        var output = document.getElementById('PhotoPreview');
+        output.src = $("#PhotoURL").val();
+    })
+</script>
+}

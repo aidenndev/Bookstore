@@ -6,8 +6,8 @@ namespace Bookstore.Models
     public class Book
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Display(Name = "Book ID")]
-        [Required(ErrorMessage = "The book ID is required.")]
         public string Id { get; set; }
 
         [Display(Name = "Book Name")]

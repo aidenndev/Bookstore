@@ -17,7 +17,7 @@ namespace Bookstore.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var books = await _service.GetAll();
+            var books = await _service.GetAllAsync();
             return View(books);
         }
 
@@ -34,7 +34,53 @@ namespace Bookstore.Controllers
             {
                 return View(book);
             }
-            _service.Add(book);
+            await _service.AddAsync(book);
+            return RedirectToAction(nameof(Index));
+        }
+
+        //Get the book details by its Id
+        public async Task<IActionResult> Details(string id)
+        {
+            var book = await _service.GetByIdAsync(id);
+
+            if (book == null) return View("NotFound");
+            return View(book);
+        }
+
+        //Edit the book details
+        public async Task<IActionResult> Edit(string id)
+        {
+            var book = await _service.GetByIdAsync(id);
+            if (book == null) return View("NotFound");
+            return View(book);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(string id, [Bind("Id,Name,PhotoURL,Description")] Book book)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(book);
+            }
+            await _service.UpdateAsync(id, book);
+            return RedirectToAction(nameof(Index));
+        }
+
+        //Delete a book
+        public async Task<IActionResult> Delete(string id)
+        {
+            var book = await _service.GetByIdAsync(id);
+            if (book == null) return View("NotFound");
+            return View(book);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(string id)
+        {
+            var book = await _service.GetByIdAsync(id);
+            if (book == null) return View("NotFound");
+
+            await _service.DeleteAsync(id);
             return RedirectToAction(nameof(Index));
         }
     }

@@ -13,31 +13,36 @@ namespace Bookstore.Data.Services
             _context = context;
         }
 
-        public void Add(Book book)
+        public async Task AddAsync(Book book)
         {
-            _context.Books.Add(book);
-            _context.SaveChanges();
+            await _context.Books.AddAsync(book);
+            await _context.SaveChangesAsync();
         }
 
-        public void Delete(string id)
+        public async Task DeleteAsync(string id)
         {
-            throw new NotImplementedException();
+            var book = await _context.Books.FirstOrDefaultAsync(x => x.Id == id);
+            _context.Books.Remove(book);
+            await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Book>> GetAll()
+        public async Task<IEnumerable<Book>> GetAllAsync()
         {
             var books = await _context.Books.ToListAsync();
             return books;
         }
 
-        public Book GetById(string id)
+        public async Task<Book> GetByIdAsync(string id)
         {
-            throw new NotImplementedException();
+            var book = await _context.Books.FirstOrDefaultAsync(x => x.Id == id);
+            return book;
         }
 
-        public Book Update(string id, Book newBook)
+        public async Task<Book> UpdateAsync(string id, Book newBook)
         {
-            throw new NotImplementedException();
+            _context.Update(newBook);
+            await _context.SaveChangesAsync();
+            return newBook;
         }
     }
 }

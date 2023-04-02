@@ -1,15 +1,15 @@
 ﻿@model Book
 
 @{
-    ViewData["Title"] = "Add a new book";
+    ViewData["Title"] = "Edit book details";
 }<div class="row text">
     <div class="col-md-8 offset-2">
         <p>
-            <h1>Add a new book</h1>
+            <h1>Edit book details</h1>
         </p>
         <div class="row">
             <div class="col-md-8 offset-2">
-                <form asp-action="Create">
+                <form asp-action="Edit">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                     <div class="form-group" text-center>
@@ -22,7 +22,7 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Id" class="control-label"></label>
-                        <input asp-for="Id" class="form-control"/>
+                        <input asp-for="Id" class="form-control" readonly/>
                         <span asp-validation-for="Id" class="text-danger"></span>
                     </div>
                     <div class="form-group">
@@ -36,7 +36,8 @@
                         <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Create" class="btn btn-outline-success float-right"/>
+                        <input type="submit" value="Update" class="btn btn-outline-success float-right"/>
+                        <a class="btn btn-danger float-right" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
                         <a class="btn btn-outline-secondary" asp-action="Index">Show all</a>
                     </div>
                 </form>   

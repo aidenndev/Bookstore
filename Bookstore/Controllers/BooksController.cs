@@ -23,11 +23,11 @@ namespace Bookstore.Controllers
 
         //Search for a book
         public async Task<IActionResult> Filter(string searchString)
-        {
-            searchString = searchString.ToLower();
+        {  
             var books = await _service.GetAllAsync();
             if (!string.IsNullOrEmpty(searchString))
             {
+                searchString = searchString.ToLower();
                 var filteredResult = books.Where(n => (n.Name.ToLower()).Contains(searchString) || (n.Description.ToLower()).Contains(searchString)).ToList();
                 return View("Index", filteredResult);
             }

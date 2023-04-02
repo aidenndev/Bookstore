@@ -1,4 +1,5 @@
 using Bookstore.Data;
+using Bookstore.Data.Cart;
 using Bookstore.Data.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +10,9 @@ builder.Services.AddDbContext<AppDbContext>(option => option.UseSqlServer(builde
 //Services configuration
 builder.Services.AddScoped<IBooksService, BooksService>();
 builder.Services.AddScoped<ICustomersService, CustomersService>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddScoped(bc => BookingCart.GetBookingCart(bc));
+builder.Services.AddSession();
 
 //Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -29,7 +33,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseSession();
 app.UseAuthorization();
 
 app.MapControllerRoute(

@@ -8,9 +8,9 @@ namespace Bookstore.Data.Cart
     {
         public AppDbContext _context { get; set; }
         //Constructor
-        public BookingCart(AppDbContext _context)
+        public BookingCart(AppDbContext context)
         {
-            _context = _context;
+            _context = context;
         }
 
         public string BookingCartId { get; set; }

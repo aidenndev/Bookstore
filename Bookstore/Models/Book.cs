@@ -1,19 +1,22 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Bookstore.Data.Base;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Bookstore.Models
 {
-    public class Book
+    public class Book : IEntityBase
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Display(Name = "Book ID")]
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         [Display(Name = "Book Name")]
         [Required(ErrorMessage = "The book name is required.")]
         [StringLength(100, MinimumLength = 3, ErrorMessage = "Name must be between 3 and 50 letters.")]
         public string Name { get; set; }
+
+        [Display(Name = "Book ID")]
+        [Required(ErrorMessage = "Book ID is required.")]
+        public string BookId { get; set; }
 
         [Display(Name = "Photo URL")]
         [Required(ErrorMessage = "Photo URL is required.")]

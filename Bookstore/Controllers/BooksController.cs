@@ -28,7 +28,7 @@ namespace Bookstore.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("Id,Name,PhotoURL,Description")] Book book)
+        public async Task<IActionResult> Create([Bind("Name,BookId,PhotoURL,Description")] Book book)
         {
             if (!ModelState.IsValid)
             {
@@ -39,7 +39,7 @@ namespace Bookstore.Controllers
         }
 
         //Get the book details by its Id
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(int id)
         {
             var book = await _service.GetByIdAsync(id);
 
@@ -48,7 +48,7 @@ namespace Bookstore.Controllers
         }
 
         //Edit the book details
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(int id)
         {
             var book = await _service.GetByIdAsync(id);
             if (book == null) return View("NotFound");
@@ -56,7 +56,7 @@ namespace Bookstore.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(string id, [Bind("Id,Name,PhotoURL,Description")] Book book)
+        public async Task<IActionResult> Edit(int id, [Bind("Name,BookId,PhotoURL,Description")] Book book)
         {
             if (!ModelState.IsValid)
             {
@@ -67,7 +67,7 @@ namespace Bookstore.Controllers
         }
 
         //Delete a book
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int id)
         {
             var book = await _service.GetByIdAsync(id);
             if (book == null) return View("NotFound");
@@ -75,7 +75,7 @@ namespace Bookstore.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var book = await _service.GetByIdAsync(id);
             if (book == null) return View("NotFound");

@@ -28,7 +28,7 @@ namespace Bookstore.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("Name,PhotoURL,Description")] Book book)
+        public async Task<IActionResult> Create([Bind("Id,Name,PhotoURL,Description")] Book book)
         {
             if (!ModelState.IsValid)
             {

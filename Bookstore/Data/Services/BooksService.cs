@@ -15,7 +15,8 @@ namespace Bookstore.Data.Services
 
         public void Add(Book book)
         {
-            throw new NotImplementedException();
+            _context.Books.Add(book);
+            _context.SaveChanges();
         }
 
         public void Delete(string id)

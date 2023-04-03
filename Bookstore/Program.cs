@@ -12,6 +12,7 @@ builder.Services.AddScoped<IBooksService, BooksService>();
 builder.Services.AddScoped<ICustomersService, CustomersService>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped(bc => BookingCart.GetBookingCart(bc));
+
 builder.Services.AddSession();
 
 //Add services to the container.
@@ -34,6 +35,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 app.UseSession();
+
 app.UseAuthorization();
 
 app.MapControllerRoute(

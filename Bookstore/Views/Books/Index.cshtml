@@ -28,14 +28,17 @@
                         <div class="card-body">
                             <p class="card-text">
                                 <b>Status: </b>
-                                @if(@book.Customer == null)
+                                @if(@book.Amount > 0)
                                 {
                                     <span class="badge bg-success">Available</span>
                                 }
                                 else
                                 {
-                                    <span class="badge bg-primary">Reserved</span>
+                                    <span class="badge bg-dark">Not Available</span>
                                 }
+                            </p>
+                            <p class="card-text">
+                                In stock: @book.Amount
                             </p>
                             <p class="card-text">
                                 Description:
@@ -48,7 +51,7 @@
                             <p class="card-text">
                                 <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@book.Id"><i class="bi bi-pencil-square"></i>Edit </a>
                                 <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@book.Id"><i class="bi bi-eye"></i>Details</a>
-                                <a class="btn btn-outline-success" asp-controller="Orders" asp-action="AddToBookingCart" asp-route-id="@book.Id"><i class="bi bi-cart-plus"></i> Add to Cart</a>
+                                <a class="btn btn-outline-success" asp-controller="Orders" asp-action="AddItemToBookingCart" asp-route-id="@book.Id"><i class="bi bi-cart-plus"></i> Add to Cart</a>
                             </p>
                         </div>
                     </div>

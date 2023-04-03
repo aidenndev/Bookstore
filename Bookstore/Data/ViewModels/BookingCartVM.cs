@@ -2,9 +2,10 @@
 
 namespace Bookstore.Data.ViewModels
 {
-    public class BookingCartViewModel
+    public class BookingCartVM
     {
         public BookingCart BookingCart { get; set; }
+        public double TotalBookingFee { get; set; }
 
     }
 }

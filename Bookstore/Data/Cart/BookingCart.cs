@@ -7,14 +7,14 @@ namespace Bookstore.Data.Cart
     public class BookingCart
     {
         public AppDbContext _context { get; set; }
+        public string BookingCartId { get; set; }
+        public List<BookingCartItem> BookingCartItems { get; set; }
+
         //Constructor
         public BookingCart(AppDbContext context)
         {
             _context = context;
         }
-
-        public string BookingCartId { get; set; }
-        public List<BookingCartItem> BookingCartItems { get; set; }
 
 
         //Get the current cart
@@ -38,19 +38,19 @@ namespace Bookstore.Data.Cart
             var cartItem = _context.BookingCartItems.FirstOrDefault(n => n.Book.Id == book.Id && n.BookingCartId == BookingCartId);
             if (cartItem == null)
             {
-                cartItem = new BookingCartItem()
+                _context.BookingCartItems.Add(new BookingCartItem()
                 {
                     BookingCartId = BookingCartId,
                     Book = book,
                     Amount = 1
-                };
-
-                _context.BookingCartItems.Add(cartItem);
+                });
             }
             else
             {
                 cartItem.Amount++;
             }
+            bool hasChanges = _context.ChangeTracker.HasChanges();
+            int updates = _context.SaveChanges();
             _context.SaveChanges();
         }
 
@@ -76,6 +76,12 @@ namespace Bookstore.Data.Cart
         public List<BookingCartItem> GetBookingCartItems()
         {
             return BookingCartItems ?? (BookingCartItems = _context.BookingCartItems.Where(n => n.BookingCartId == BookingCartId).Include(n => n.Book).ToList());
+        }
+
+        public double GetTotalBookingFee()
+        {
+            var total = _context.BookingCartItems.Where(n => n.BookingCartId == BookingCartId).Select(n => n.Amount*2.19).Sum();
+            return total;
         }
     }
 }

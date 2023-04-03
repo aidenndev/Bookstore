@@ -30,6 +30,9 @@ namespace Bookstore.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
                     b.Property<string>("BookId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -50,9 +53,6 @@ namespace Bookstore.Migrations
                     b.Property<string>("PhotoURL")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("ReservedDate")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 

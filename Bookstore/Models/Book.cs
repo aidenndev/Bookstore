@@ -27,7 +27,7 @@ namespace Bookstore.Models
         [StringLength(500, MinimumLength = 3, ErrorMessage = "Name must be between 3 and 50 letters.")]
         public string Description { get; set; }
 
-        public DateTime ReservedDate { get; set; }
+        public int Amount { get; set; }
 
         //Relationship with Customer
         public int? CustomerId { get; set; }

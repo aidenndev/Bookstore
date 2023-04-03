@@ -20,20 +20,34 @@ namespace Bookstore.Controllers
             var items = _bookingCart.GetBookingCartItems();
             _bookingCart.BookingCartItems = items;
             
-            var response = new BookingCartViewModel()
+            var response = new BookingCartVM()
             {
-                BookingCart = _bookingCart
+                BookingCart = _bookingCart,
+                TotalBookingFee = _bookingCart.GetTotalBookingFee()
             };
             return View(response);
         }
 
-        public async Task<RedirectToActionResult> AddToBookingCart(int id)
+        //Add a book to the cart
+        public async Task<IActionResult> AddItemToBookingCart(int id)
         {
-            var item = await _booksService.GetByIdAsync(id);
+            var item = await _booksService.GetBookByIdAsync(id);
 
             if(item != null)
             {
                 _bookingCart.AddItemToCart(item);  
+            }
+            return RedirectToAction(nameof(BookingCart));
+        }
+
+        //Remove a book from a cart
+        public async Task<IActionResult> RemoveItemFromBookingCart(int id)
+        {
+            var item = await _booksService.GetBookByIdAsync(id);
+
+            if (item != null)
+            {
+                _bookingCart.RemoveItemFromCart(item);
             }
             return RedirectToAction(nameof(BookingCart));
         }

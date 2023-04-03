@@ -17,7 +17,7 @@ namespace Bookstore.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var books = await _service.GetAllAsync();
+            var books = await _service.GetAllAsync(n => n.Customer);
             return View(books);
         }
 
@@ -54,7 +54,7 @@ namespace Bookstore.Controllers
         //Get the book details by its Id
         public async Task<IActionResult> Details(int id)
         {
-            var book = await _service.GetByIdAsync(id);
+            var book = await _service.GetBookByIdAsync(id);
 
             if (book == null) return View("NotFound");
             return View(book);

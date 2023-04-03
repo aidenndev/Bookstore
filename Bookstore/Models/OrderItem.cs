@@ -8,7 +8,6 @@ namespace Bookstore.Models
         [Key]
         public int Id { get; set; }
         public int Amount { get; set; }
-        
         public int BookId { get; set; }
         [ForeignKey("BookId")]
         public virtual Book Book { get; set; }
